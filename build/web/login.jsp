@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>My Company Login</h1>
-        <div style="color:red" type="alert">${errorMessage}</div>
+        <h4 style="color:red" type="alert">${errorMessage}</h4>
         <form action="login" method="post">
             <label class="pad_top">User ID: </label>
             <input type="text" name="userID" required><br>
