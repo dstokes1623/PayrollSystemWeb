@@ -3,9 +3,10 @@
  */
 package domain;
 
-import DataAccess.EmployeeDA;
+import database.EmployeeDA;
 import Exceptions.LoginException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -96,11 +97,7 @@ public abstract class Employee {
     }
 
     public void setOvertimeRate(){}
-
-    public double calculateGrossPay(){
-        return 0.0;
-    }
-    public double calculateGrossPay(double hoursWorked, double overtimeHours){
+    public double calculateGrossPay(Date date){
         return 0.0;
     }
     

@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="styles/main.css" type="text/css"/>
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>Login Successful</h1>
+        <h2>Hello ${user.firstName}</h2>
         
     </body>
 </html>

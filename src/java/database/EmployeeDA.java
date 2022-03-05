@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataAccess;
+package database;
 
 import Exceptions.LoginException;
 import domain.Employee;
@@ -52,7 +52,7 @@ public class EmployeeDA {
         try {
             for(Employee employee: employees) {
                 if(employee.getUserID().equals(userID)){
-                emp = employee;
+                return emp = employee;
             }
         }
         } catch(Exception e){
@@ -67,7 +67,7 @@ public class EmployeeDA {
             }
         }
         catch (Exception e){
-            throw new LoginException("The password you entered is invalid");
+            throw new LoginException("The user id you entered is invalid");
         }
         return false;
     }

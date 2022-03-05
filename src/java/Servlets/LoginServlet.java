@@ -5,8 +5,9 @@
  */
 package Servlets;
 
-import DataAccess.EmployeeDA;
+import database.EmployeeDA;
 import Exceptions.LoginException;
+import database.PayrollSystemDA;
 import domain.Employee;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,6 +28,7 @@ public class LoginServlet extends HttpServlet {
    protected void doPost(HttpServletRequest request, 
                           HttpServletResponse response) 
                           throws ServletException, IOException {
+       PayrollSystemDA.initialize();
         String url = "/success.jsp";
         // get current action
         String userID = request.getParameter("userID");
@@ -40,8 +42,14 @@ public class LoginServlet extends HttpServlet {
        try {
            user = Employee.validateLogin(userID, password);
            request.setAttribute("user", user);
+           if(user == (null)){
+               request.setAttribute("errorMessage", "The password you have entered is invalid");
+               url = "/login.jsp";
+               
+           }
        } catch (LoginException ex) {
            request.setAttribute("errorMessage", ex.getMessage());
+           url = "/login.jsp";
        }
         getServletContext()
             .getRequestDispatcher(url)

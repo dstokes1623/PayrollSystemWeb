@@ -4,6 +4,9 @@
 package domain;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -40,9 +43,30 @@ public class HourlyEmployee extends Employee {
     }
     
     @Override
-    public double calculateGrossPay(double hoursWorked, double overtimeHours){
-        double regularHours = hoursWorked - overtimeHours;
-        return (regularHours * this.hourlyRate) + (overtimeHours * this.overtimeRate);
+    public double calculateGrossPay(Date date){
+        ArrayList<Timecard> timecards;
+        Timecard timecard;
+        Date beginDate, endDate, timecardDate;
+        Calendar calendar = Calendar.getInstance();
+        
+        endDate = date;
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -6);
+        beginDate = calendar.getTime();
+         double grossPay = 0;
+        
+        
+        timecards = Timecard.getTimecardsByID(this.getEmployeeID(), beginDate, endDate);
+            for(int i = 0; i < timecards.size(); i++) {
+            timecard = timecards.get(i);
+            timecardDate = timecard.getDate();
+            if(timecardDate.compareTo(beginDate) >= 0 && timecardDate.compareTo(endDate) <= 0 ){
+                grossPay += timecard.getHoursWorked() * this.getHourlyRate();
+                grossPay += timecard.getOvertimeHoursWorked() * this.getHourlyRate() * this.getOvertimeRate();
+            }
+        }
+        return grossPay;
+        
     }
     
     @Override

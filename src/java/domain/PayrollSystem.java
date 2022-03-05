@@ -3,7 +3,7 @@
  */
 package domain;
 
-import DataAccess.PayrollSystemDA;
+import database.PayrollSystemDA;
 import java.util.ArrayList;
 import java.util.Date;
 

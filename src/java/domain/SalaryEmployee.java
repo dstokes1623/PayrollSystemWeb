@@ -4,6 +4,7 @@
 package domain;
 
 import java.text.NumberFormat;
+import java.util.Date;
 
 /**
  *
@@ -35,7 +36,7 @@ public class SalaryEmployee extends Employee {
     }
     
     @Override
-    public double calculateGrossPay(){
+    public double calculateGrossPay(Date date){
         return this.annualSalary / 52;
     }
 }

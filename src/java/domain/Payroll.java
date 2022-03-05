@@ -5,7 +5,7 @@
  */
 package domain;
 
-import DataAccess.PayrollDA;
+import database.PayrollDA;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,11 +65,9 @@ public class Payroll {
         return PayrollDA.getPayroll();
     }
     public void calculatePayroll(Date weekEnding, Employee emp){
-        double grossPay = 0;
+        double grossPay = emp.calculateGrossPay(weekEnding);
         
-        if(emp instanceof SalaryEmployee){
-                grossPay = emp.calculateGrossPay();
-          }
+        
         this.date = weekEnding;
         this.employeeID = emp.getEmployeeID();
         this.grossPay = grossPay;
@@ -77,30 +75,7 @@ public class Payroll {
         this.netPay = this.grossPay - this.totalDeductions;
         
     }
-    public void calculatePayroll(Date weekEnding, Employee emp, Timecard timecard){
-        
-        double grossPay = 0;
-        
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(weekEnding);
-        //Get date a week before date entered
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)-6);
-        Date weekBefore = calendar.getTime();
-        if(emp instanceof SalaryEmployee){
-                grossPay = emp.calculateGrossPay();
-          }
-        if(timecard.getDate().compareTo(weekEnding) < 0 && timecard.getDate().compareTo(weekBefore) > 0){
-            if(emp instanceof HourlyEmployee && timecard.getEmployeeID() == emp.getEmployeeID()){
-                grossPay = emp.calculateGrossPay(timecard.getHoursWorked(), timecard.getOvertimeHoursWorked());
-            } 
-        }
-        this.date = weekEnding;
-        this.employeeID = emp.getEmployeeID();
-        this.grossPay = grossPay;
-        this.totalDeductions = WithholdingType.calculateWithholding(grossPay);
-        this.netPay = this.grossPay - this.totalDeductions;
-        
-    }
+   
 
     @Override
     public String toString() {

@@ -3,7 +3,7 @@
  */
 package domain;
 
-import DataAccess.TimecardDA;
+import database.TimecardDA;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -62,7 +62,7 @@ public class Timecard {
     public static ArrayList<Timecard> getTimecards(){
         return TimecardDA.getTimecards();
     }
-    public static ArrayList<Timecard> getTimecardsByID(int empID){
+    public static ArrayList<Timecard> getTimecardsByID(int empID, Date startDate, Date endDate){
         return TimecardDA.getTimecardsByID(empID);
     }
 

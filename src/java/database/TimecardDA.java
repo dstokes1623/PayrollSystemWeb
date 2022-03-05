@@ -1,7 +1,7 @@
 /*
  * Serves as the data access class for timecards will later be accessing database instead of arraylists
  */
-package DataAccess;
+package database;
 
 import domain.Timecard;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@
  */
 package domain;
 
-import DataAccess.WithholdingTypeDA;
+import database.WithholdingTypeDA;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
